@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgbqpshxnawkk"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/Paddle.cs" id="1_mnx7n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5aiy"]
+size = Vector2(10, 160)
+
+[node name="Paddle" type="CharacterBody2D"]
+collision_mask = 6
+platform_on_leave = 2
+safe_margin = 0.001
+script = ExtResource("1_mnx7n")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 0.580392, 0.580392, 1)
+polygon = PackedVector2Array(-5, -80, 5, -80, 5, 80, -5, 80)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p5aiy")

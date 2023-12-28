@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbylql5qbyirw"]
+
+[ext_resource type="PackedScene" uid="uid://bgbqpshxnawkk" path="res://Scenes/Entities/Paddle.tscn" id="1_ve6he"]
+[ext_resource type="PackedScene" uid="uid://dtw7x4hfttrm2" path="res://Scenes/Blocks/Wall.tscn" id="2_rl715"]
+[ext_resource type="PackedScene" uid="uid://dut8m131fhtb1" path="res://Scenes/Entities/Ball.tscn" id="3_r5ubq"]
+
+[node name="Match" type="Node2D"]
+
+[node name="LeftPaddle" parent="." instance=ExtResource("1_ve6he")]
+position = Vector2(-530, 0)
+
+[node name="RightPaddle" parent="." instance=ExtResource("1_ve6he")]
+position = Vector2(530, 0)
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="WallTop" parent="Walls" instance=ExtResource("2_rl715")]
+position = Vector2(0, -299)
+
+[node name="WallDown" parent="Walls" instance=ExtResource("2_rl715")]
+position = Vector2(0, 299)
+
+[node name="Ball" parent="." instance=ExtResource("3_r5ubq")]
