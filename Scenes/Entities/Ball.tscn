@@ -17,3 +17,9 @@ texture = ExtResource("2_uhitq")
 
 [node name="BallCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ejtya")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

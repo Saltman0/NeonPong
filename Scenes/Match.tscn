@@ -50,6 +50,7 @@ one_shot = true
 [node name="MatchInterface" parent="." instance=ExtResource("4_q7xwt")]
 metadata/_edit_lock_ = true
 
+[connection signal="SendPosition" from="Ball" to="." method="OnBallSendPosition"]
 [connection signal="body_entered" from="Goals/LeftGoal" to="." method="OnLeftGoalBodyEntered"]
 [connection signal="body_entered" from="Goals/RightGoal" to="." method="OnRightGoalBodyEntered"]
 [connection signal="timeout" from="GoalTimer" to="." method="OnGoalTimerTimeout"]

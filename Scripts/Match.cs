@@ -37,15 +37,13 @@ public partial class Match : Node
 	public void OnLeftGoalBodyEntered(Ball ball)
 	{
 		_startBallDirection = -1;
-		
 		_rightScore += 1;
 		
 		UpdateRightScoreCounter();
 		
 		if (_rightScore == _scoreToReach)
 		{
-			GetNode<Label>("MatchInterface/EndOfMatchLabel").Visible = true;
-			GetNode<Label>("MatchInterface/EndOfMatchLabel").Text = "Right paddle won !";
+			DisplayWinner("Left paddle won !");
 		}
 		else
 		{
@@ -56,15 +54,13 @@ public partial class Match : Node
 	public void OnRightGoalBodyEntered(Ball ball)
 	{
 		_startBallDirection = 1;
-
 		_leftScore += 1;
 		
 		UpdateLeftScoreCounter();
 
 		if (_leftScore == _scoreToReach)
 		{
-			GetNode<Label>("MatchInterface/EndOfMatchLabel").Visible = true;
-			GetNode<Label>("MatchInterface/EndOfMatchLabel").Text = "Left paddle won !";
+			DisplayWinner("Left paddle won !");
 		}
 		else
 		{
@@ -76,6 +72,11 @@ public partial class Match : Node
 	{
 		_ball.ResetBall(_ballSpawn.Position, _startBallDirection);
 	}
+
+	public void OnBallSendPosition(Vector2 position)
+	{
+		GetNode<Paddle>("RightPaddle").BallPosition = position;
+	}
 	
 	public void UpdateLeftScoreCounter()
 	{
@@ -85,5 +86,11 @@ public partial class Match : Node
 	public void UpdateRightScoreCounter()
 	{
 		GetNode<Label>("MatchInterface/ScorePanel/RightScoreCounter").Text = _rightScore.ToString();
+	}
+
+	public void DisplayWinner(string text)
+	{
+		GetNode<Label>("MatchInterface/EndOfMatchLabel").Visible = true;
+		GetNode<Label>("MatchInterface/EndOfMatchLabel").Text = text;
 	}
 }

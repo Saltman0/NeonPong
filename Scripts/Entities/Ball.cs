@@ -4,6 +4,9 @@ using System.Diagnostics;
 
 public partial class Ball : CharacterBody2D
 {
+	[Signal]
+	public delegate void SendPositionEventHandler(int position);
+	
 	private int _speed = 500;
 
 	// Called when the node enters the scene tree for the first time.
@@ -32,5 +35,10 @@ public partial class Ball : CharacterBody2D
 	{
 		Position = position;
 		Velocity = new Vector2(direction, 0);
+	}
+
+	public void OnTimerTimeout()
+	{
+		EmitSignal(SignalName.SendPosition, Position);
 	}
 }
