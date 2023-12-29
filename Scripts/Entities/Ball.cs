@@ -11,7 +11,7 @@ public partial class Ball : RigidBody2D
 	public override void _Ready()
 	{
 		// Initialize LinearVelocity
-		LinearVelocity = new Vector2(_speed, 500);
+		/*LinearVelocity = new Vector2(_speed, 0);*/
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

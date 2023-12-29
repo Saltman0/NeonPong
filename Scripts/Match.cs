@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Match : Node
 {
@@ -7,7 +8,7 @@ public partial class Match : Node
 
 	private int _rightScore = 0;
 
-	private PackedScene _ball;
+	private Ball _ball;
 
 	private Marker2D _ballSpawn;
 
@@ -16,7 +17,7 @@ public partial class Match : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_ball = GD.Load<PackedScene>("res://Scenes/Entities/Ball.tscn");
+		_ball = GetNode<Ball>("Ball");
 		_ballSpawn = GetNode<Marker2D>("BallSpawn");
 		_goalTimer = GetNode<Timer>("GoalTimer");
 	}
@@ -24,14 +25,13 @@ public partial class Match : Node
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		/*GetNode<Paddle>("RightPaddle").BallPosition = _b*/
 	}
 
 	public void OnLeftGoalBodyEntered(Node body)
 	{
 		UpdateRightScore(_rightScore + 1);
 		
-		body.QueueFree();
+		Trace.WriteLine(_ball.Position);
 		
 		_goalTimer.Start();
 	}
@@ -40,18 +40,14 @@ public partial class Match : Node
 	{
 		UpdateLeftScore(_leftScore + 1);
 		
-		body.QueueFree();
+		Trace.WriteLine(_ball.Position);
 		
 		_goalTimer.Start();
 	}
 
 	public void OnGoalTimerTimeout()
 	{
-		Ball newBall = (Ball)_ball.Instantiate();
-
-		newBall.Position = _ballSpawn.Position;
-		
-		AddChild(newBall);
+		_ball.Position = _ballSpawn.Position;
 	}
 	
 	public void UpdateLeftScore(int leftScore)
