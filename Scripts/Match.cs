@@ -22,8 +22,9 @@ public partial class Match : Node
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
+		/*GetNode<Paddle>("RightPaddle").BallPosition = _b*/
 	}
 
 	public void OnLeftGoalBodyEntered(Node body)

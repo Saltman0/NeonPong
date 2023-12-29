@@ -18,6 +18,7 @@ position = Vector2(50, 324)
 
 [node name="RightPaddle" parent="." instance=ExtResource("1_ve6he")]
 position = Vector2(1102, 324)
+_isPlayer = false
 
 [node name="Walls" type="Node2D" parent="."]
 position = Vector2(576, 324)

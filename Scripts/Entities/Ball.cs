@@ -6,7 +6,7 @@ public partial class Ball : RigidBody2D
 {
 	private int _speed = 500;
 
-	private Vector2 _linearVelocity;
+	/*private Vector2 _linearVelocity;*/
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

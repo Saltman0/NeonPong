@@ -4,17 +4,39 @@ using System.Diagnostics;
 
 public partial class Paddle : CharacterBody2D
 {
-	private const int Speed = 300;
+	[Export]
+	private bool _isPlayer = true;
+
+	private Vector2 _ballPosition;
 	
-	private Vector2 _velocity;
+	private const int Speed = 300;
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Velocity = new Vector2(
-			0, 
-			Input.GetVector("move_left", "move_right", "move_top", "move_down").Y
-		) * Speed;
+		if (_isPlayer)
+		{
+			Velocity = new Vector2(
+				0, 
+				Input.GetVector("move_left", "move_right", "move_top", "move_down").Y
+			) * Speed;
+		}
+		else
+		{
+			
+		}
 		
 		MoveAndSlide();
+	}
+
+	public bool IsPlayer
+	{
+		get => _isPlayer;
+		set => _isPlayer = value;
+	}
+
+	public Vector2 BallPosition
+	{
+		get => _ballPosition;
+		set => _ballPosition = value;
 	}
 }
