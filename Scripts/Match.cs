@@ -4,9 +4,13 @@ using System.Diagnostics;
 
 public partial class Match : Node
 {
+	private int _startBallDirection = -1;
+	
 	private int _leftScore = 0;
 
 	private int _rightScore = 0;
+
+	private int _scoreToReach = 3;
 
 	private Ball _ball;
 
@@ -17,9 +21,12 @@ public partial class Match : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		
 		_ball = GetNode<Ball>("Ball");
 		_ballSpawn = GetNode<Marker2D>("BallSpawn");
 		_goalTimer = GetNode<Timer>("GoalTimer");
+		
+		_ball.ResetBall(_ballSpawn.Position, _startBallDirection);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,38 +34,56 @@ public partial class Match : Node
 	{
 	}
 
-	public void OnLeftGoalBodyEntered(Node body)
+	public void OnLeftGoalBodyEntered(Ball ball)
 	{
-		UpdateRightScore(_rightScore + 1);
+		_startBallDirection = -1;
 		
-		Trace.WriteLine(_ball.Position);
+		_rightScore += 1;
 		
-		_goalTimer.Start();
+		UpdateRightScoreCounter();
+		
+		if (_rightScore == _scoreToReach)
+		{
+			GetNode<Label>("MatchInterface/EndOfMatchLabel").Visible = true;
+			GetNode<Label>("MatchInterface/EndOfMatchLabel").Text = "Right paddle won !";
+		}
+		else
+		{
+			_goalTimer.Start();
+		}
 	}
 	
-	public void OnRightGoalBodyEntered(Node body)
+	public void OnRightGoalBodyEntered(Ball ball)
 	{
-		UpdateLeftScore(_leftScore + 1);
+		_startBallDirection = 1;
+
+		_leftScore += 1;
 		
-		Trace.WriteLine(_ball.Position);
-		
-		_goalTimer.Start();
+		UpdateLeftScoreCounter();
+
+		if (_leftScore == _scoreToReach)
+		{
+			GetNode<Label>("MatchInterface/EndOfMatchLabel").Visible = true;
+			GetNode<Label>("MatchInterface/EndOfMatchLabel").Text = "Left paddle won !";
+		}
+		else
+		{
+			_goalTimer.Start();
+		}
 	}
 
 	public void OnGoalTimerTimeout()
 	{
-		_ball.Position = _ballSpawn.Position;
+		_ball.ResetBall(_ballSpawn.Position, _startBallDirection);
 	}
 	
-	public void UpdateLeftScore(int leftScore)
+	public void UpdateLeftScoreCounter()
 	{
-		_leftScore = leftScore;
-		GetNode<Label>("MatchInterface/ScorePanel/LeftScore").Text = _leftScore.ToString();
+		GetNode<Label>("MatchInterface/ScorePanel/LeftScoreCounter").Text = _leftScore.ToString();
 	}
 
-	public void UpdateRightScore(int rightScore)
+	public void UpdateRightScoreCounter()
 	{
-		_rightScore = rightScore;
-		GetNode<Label>("MatchInterface/ScorePanel/RightScore").Text = _rightScore.ToString();
+		GetNode<Label>("MatchInterface/ScorePanel/RightScoreCounter").Text = _rightScore.ToString();
 	}
 }

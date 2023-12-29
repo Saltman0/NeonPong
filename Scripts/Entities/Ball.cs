@@ -2,39 +2,35 @@ using Godot;
 using System;
 using System.Diagnostics;
 
-public partial class Ball : RigidBody2D
+public partial class Ball : CharacterBody2D
 {
 	private int _speed = 500;
 
-	/*private Vector2 _linearVelocity;*/
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// Initialize LinearVelocity
-		/*LinearVelocity = new Vector2(_speed, 0);*/
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		KinematicCollision2D collisionObject = MoveAndCollide(Velocity * _speed * (float)delta);
+
+		if (collisionObject != null)
+		{
+			float speedMultiplier = 1.00f;
+			if (collisionObject.GetCollider() is Paddle)
+			{
+				speedMultiplier = 1.02f;
+			}
+			
+			Velocity = Velocity.Bounce(collisionObject.GetNormal()) * speedMultiplier;
+		}
 	}
 
-	public void OnBodyEntered(Node body)
+	public void ResetBall(Vector2 position, int direction)
 	{
-		/*if (body is Paddle)
-		{
-			_linearVelocity.X *= -1;
-			LinearVelocity = _linearVelocity;
-			Trace.WriteLine(LinearVelocity);
-		}*/
-		
-		/*Trace.WriteLine(LinearVelocity.X);
-
-		_linearVelocity.X *= -1;
-
-		LinearVelocity = _linearVelocity;
-
-		Trace.WriteLine(LinearVelocity);*/
-		/*area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized();*/
+		Position = position;
+		Velocity = new Vector2(direction, 0);
 	}
 }

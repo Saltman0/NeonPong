@@ -12,7 +12,6 @@ script = ExtResource("1_xb6xk")
 
 [node name="Ball" parent="." instance=ExtResource("3_r5ubq")]
 position = Vector2(576, 324)
-linear_velocity = Vector2(500, 0)
 
 [node name="LeftPaddle" parent="." instance=ExtResource("1_ve6he")]
 position = Vector2(50, 324)
