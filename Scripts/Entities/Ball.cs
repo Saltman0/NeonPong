@@ -10,26 +10,31 @@ public partial class Ball : RigidBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		ApplyCentralImpulse(new Vector2(1, 1));
-		_linearVelocity = LinearVelocity;
-		/*Random rnd = new Random();
-		int month  = rnd.Next(1, 13);  // creates a number between 1 and 12
-		LinearVelocity = new Vector2(rnd.Next(0, 100), rnd.Next(1, 13)) * _speed;*/
+		// Initialize LinearVelocity
+		LinearVelocity = new Vector2(_speed, 500);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
-		/*Trace.WriteLine(_linearVelocity);*/
 	}
 
-	public override void _IntegrateForces(PhysicsDirectBodyState2D state)
+	public void OnBodyEntered(Node body)
 	{
-	}
+		/*if (body is Paddle)
+		{
+			_linearVelocity.X *= -1;
+			LinearVelocity = _linearVelocity;
+			Trace.WriteLine(LinearVelocity);
+		}*/
+		
+		/*Trace.WriteLine(LinearVelocity.X);
 
-	public void OnBodyEntered(Node paddle)
-	{
-		ApplyCentralImpulse(new Vector2(2, 2));
-		Trace.WriteLine(_linearVelocity);
+		_linearVelocity.X *= -1;
+
+		LinearVelocity = _linearVelocity;
+
+		Trace.WriteLine(LinearVelocity);*/
+		/*area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized();*/
 	}
 }
