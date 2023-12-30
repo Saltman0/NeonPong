@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bts52tw1g7hff"]
+[gd_scene load_steps=2 format=3 uid="uid://bts52tw1g7hff"]
+
+[ext_resource type="Script" path="res://Scripts/Interfaces/MatchInterface.cs" id="1_ou0ik"]
 
 [node name="MatchInterface" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_ou0ik")
 
 [node name="ScorePanel" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -14,9 +17,8 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -25.0
-offset_top = 10.0
 offset_right = 25.0
-offset_bottom = 33.0
+offset_bottom = 23.0
 grow_horizontal = 2
 metadata/_edit_group_ = true
 
@@ -34,8 +36,7 @@ text = "0
 "
 horizontal_alignment = 2
 
-[node name="EndOfMatchLabel" type="Label" parent="."]
-visible = false
+[node name="MatchMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -43,9 +44,30 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = -11.5
+offset_top = -20.0
 offset_right = 20.0
-offset_bottom = 11.5
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "End of the game"
+metadata/_edit_group_ = true
+
+[node name="Announcement" type="Label" parent="MatchMenu"]
+visible = false
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="MatchButtonsContainer" type="GridContainer" parent="MatchMenu"]
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="ReplayButton" type="Button" parent="MatchMenu/MatchButtonsContainer"]
+layout_mode = 2
+text = "Replay"
+
+[node name="MainMenuButton" type="Button" parent="MatchMenu/MatchButtonsContainer"]
+layout_mode = 2
+text = "Leave"
+
+[connection signal="pressed" from="MatchMenu/MatchButtonsContainer/ReplayButton" to="." method="OnReplayButtonPressed"]
+[connection signal="pressed" from="MatchMenu/MatchButtonsContainer/MainMenuButton" to="." method="OnMainMenuButtonPressed"]

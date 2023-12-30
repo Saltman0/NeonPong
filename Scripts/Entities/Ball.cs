@@ -21,20 +21,8 @@ public partial class Ball : CharacterBody2D
 
 		if (collisionObject != null)
 		{
-			float speedMultiplier = 1.00f;
-			if (collisionObject.GetCollider() is Paddle)
-			{
-				speedMultiplier = 1.02f;
-			}
-			
-			Velocity = Velocity.Bounce(collisionObject.GetNormal()) * speedMultiplier;
+			Velocity = Velocity.Bounce(collisionObject.GetNormal()) * 1.02f;
 		}
-	}
-
-	public void ResetBall(Vector2 position, int direction)
-	{
-		Position = position;
-		Velocity = new Vector2(direction, 0);
 	}
 
 	public void OnTimerTimeout()

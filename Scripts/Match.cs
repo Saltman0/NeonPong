@@ -14,19 +14,38 @@ public partial class Match : Node
 
 	private Ball _ball;
 
-	private Marker2D _ballSpawn;
+	private Marker2D _ballSpawnMarker;
+	
+	private Marker2D _leftPaddleMarker;
+	
+	private Marker2D _rightPaddleMarker;
+
+	private Paddle _leftPaddle;
+	
+	private Paddle _rightPaddle;
 
 	private Timer _goalTimer;
+
+	private Label _announcement;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		
 		_ball = GetNode<Ball>("Ball");
-		_ballSpawn = GetNode<Marker2D>("BallSpawn");
-		_goalTimer = GetNode<Timer>("GoalTimer");
 		
-		_ball.ResetBall(_ballSpawn.Position, _startBallDirection);
+		_ballSpawnMarker = GetNode<Marker2D>("Markers/BallSpawnMarker");
+		_leftPaddleMarker = GetNode<Marker2D>("Markers/LeftPaddleMarker");
+		_rightPaddleMarker = GetNode<Marker2D>("Markers/RightPaddleMarker");
+
+		_leftPaddle = GetNode<Paddle>("LeftPaddle");
+		_rightPaddle = GetNode<Paddle>("RightPaddle");
+		
+		_goalTimer = GetNode<Timer>("GoalTimer");
+
+		_announcement = GetNode<Label>("MatchInterface/MatchMenu/Announcement");
+		
+		_ball.Velocity = new Vector2(_startBallDirection, 0);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -37,16 +56,15 @@ public partial class Match : Node
 	public void OnLeftGoalBodyEntered(Ball ball)
 	{
 		_startBallDirection = -1;
-		_rightScore += 1;
+		RightScore += 1;
 		
-		UpdateRightScoreCounter();
-		
-		if (_rightScore == _scoreToReach)
+		if (RightScore == _scoreToReach)
 		{
-			DisplayWinner("Left paddle won !");
+			ToggleMatchButtonsContainer(true);
 		}
 		else
 		{
+			ToggleMatchAnnouncement(true, "Goal from right paddle !");
 			_goalTimer.Start();
 		}
 	}
@@ -54,43 +72,86 @@ public partial class Match : Node
 	public void OnRightGoalBodyEntered(Ball ball)
 	{
 		_startBallDirection = 1;
-		_leftScore += 1;
-		
-		UpdateLeftScoreCounter();
+		LeftScore += 1;
 
-		if (_leftScore == _scoreToReach)
+		if (LeftScore == _scoreToReach)
 		{
-			DisplayWinner("Left paddle won !");
+			ToggleMatchButtonsContainer(true);
 		}
 		else
 		{
+			ToggleMatchAnnouncement(true, "Goal from left paddle !");
 			_goalTimer.Start();
 		}
 	}
 
 	public void OnGoalTimerTimeout()
 	{
-		_ball.ResetBall(_ballSpawn.Position, _startBallDirection);
+		_announcement.Visible = false;
+		ResetPaddlePositions();
+		ResetBall();
 	}
+
+	public void OnMatchInterfaceReplayButtonPressed()
+	{
+		ReplayMatch();
+	}
+
+	public void ReplayMatch()
+	{
+		ToggleMatchButtonsContainer(false);
+		ResetBall();
+		ResetPaddlePositions();
+		ResetScores();
+	}
+
+	public void ResetBall()
+	{
+		_ball.Position = _ballSpawnMarker.Position;
+		_ball.Velocity = new Vector2(_startBallDirection, 0);
+	}
+
+	public void ResetPaddlePositions()
+	{
+		_leftPaddle.Position = new Vector2(_leftPaddle.Position.X, _leftPaddleMarker.Position.Y);
+		_rightPaddle.Position = new Vector2(_rightPaddle.Position.X, _rightPaddleMarker.Position.Y);
+	}
+
+	public void ResetScores()
+	{
+		LeftScore = 0;
+		RightScore = 0;
+	}
+
+	public int LeftScore
+	{
+		get => _leftScore;
+		set
+		{
+			_leftScore = value; 
+			GetNode<Label>("MatchInterface/ScorePanel/LeftScoreCounter").Text = _leftScore.ToString();
+		}
+	}
+
+	public int RightScore
+	{
+		get => _rightScore;
+		set { _rightScore = value; GetNode<Label>("MatchInterface/ScorePanel/RightScoreCounter").Text = _rightScore.ToString(); }
+}
 
 	public void OnBallSendPosition(Vector2 position)
 	{
-		GetNode<Paddle>("RightPaddle").BallPosition = position;
+		_rightPaddle.BallPosition = position;
+	}
+
+	public void ToggleMatchAnnouncement(bool visible, string text = null)
+	{
+		_announcement.Visible = visible;
+		_announcement.Text = text;
 	}
 	
-	public void UpdateLeftScoreCounter()
+	public void ToggleMatchButtonsContainer(bool visible)
 	{
-		GetNode<Label>("MatchInterface/ScorePanel/LeftScoreCounter").Text = _leftScore.ToString();
-	}
-
-	public void UpdateRightScoreCounter()
-	{
-		GetNode<Label>("MatchInterface/ScorePanel/RightScoreCounter").Text = _rightScore.ToString();
-	}
-
-	public void DisplayWinner(string text)
-	{
-		GetNode<Label>("MatchInterface/EndOfMatchLabel").Visible = true;
-		GetNode<Label>("MatchInterface/EndOfMatchLabel").Text = text;
+		GetNode<GridContainer>("MatchInterface/MatchMenu/MatchButtonsContainer").Visible = visible;
 	}
 }

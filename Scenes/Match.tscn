@@ -40,8 +40,16 @@ scale = Vector2(1.8, 1.8)
 position = Vector2(1147, 324)
 scale = Vector2(1.8, 1.8)
 
-[node name="BallSpawn" type="Marker2D" parent="."]
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="BallSpawnMarker" type="Marker2D" parent="Markers"]
 position = Vector2(576, 324)
+
+[node name="LeftPaddleMarker" type="Marker2D" parent="Markers"]
+position = Vector2(50, 324)
+
+[node name="RightPaddleMarker" type="Marker2D" parent="Markers"]
+position = Vector2(1102, 324)
 
 [node name="GoalTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -54,3 +62,4 @@ metadata/_edit_lock_ = true
 [connection signal="body_entered" from="Goals/LeftGoal" to="." method="OnLeftGoalBodyEntered"]
 [connection signal="body_entered" from="Goals/RightGoal" to="." method="OnRightGoalBodyEntered"]
 [connection signal="timeout" from="GoalTimer" to="." method="OnGoalTimerTimeout"]
+[connection signal="ReplayButtonPressed" from="MatchInterface" to="." method="OnMatchInterfaceReplayButtonPressed"]

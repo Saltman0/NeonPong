@@ -22,19 +22,31 @@ public partial class Paddle : CharacterBody2D
 	{
 		if (_isPlayer)
 		{
-			_velocity = new Vector2(
-				0, 
-				Input.GetVector("move_left", "move_right", "move_top", "move_down").Y
-			) * Speed;
+			HandlePlayerMovement();
 		}
 		else
 		{
-			_velocity.Y = (_ballPosition.Y > Position.Y ? 1 : -1) * Speed;
+			HandleAIMovement();
 		}
 
 		Velocity = _velocity;
 		
 		MoveAndSlide();
+	}
+
+	public void HandlePlayerMovement()
+	{
+		_velocity = new Vector2(
+			0, 
+			Input.GetVector("move_left", "move_right", "move_top", "move_down").Y
+		) * Speed;
+		Velocity = _velocity;
+	}
+	
+	public void HandleAIMovement()
+	{
+		_velocity.Y = (_ballPosition.Y > Position.Y ? 1 : -1) * Speed;
+		Velocity = _velocity;
 	}
 
 	public bool IsPlayer
