@@ -54,6 +54,7 @@ metadata/_edit_group_ = true
 [node name="Announcement" type="Label" parent="MatchMenu"]
 visible = false
 layout_mode = 2
+text = "Announcement text"
 horizontal_alignment = 1
 
 [node name="MatchButtonsContainer" type="GridContainer" parent="MatchMenu"]
@@ -61,6 +62,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 columns = 2
+metadata/_edit_group_ = true
 
 [node name="ReplayButton" type="Button" parent="MatchMenu/MatchButtonsContainer"]
 layout_mode = 2

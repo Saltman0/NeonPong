@@ -14,36 +14,21 @@ public partial class Match : Node
 
 	private Ball _ball;
 
-	private Marker2D _ballSpawnMarker;
-	
-	private Marker2D _leftPaddleMarker;
-	
-	private Marker2D _rightPaddleMarker;
-
 	private Paddle _leftPaddle;
 	
 	private Paddle _rightPaddle;
 
 	private Timer _goalTimer;
-
-	private Label _announcement;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
 		_ball = GetNode<Ball>("Ball");
-		
-		_ballSpawnMarker = GetNode<Marker2D>("Markers/BallSpawnMarker");
-		_leftPaddleMarker = GetNode<Marker2D>("Markers/LeftPaddleMarker");
-		_rightPaddleMarker = GetNode<Marker2D>("Markers/RightPaddleMarker");
 
 		_leftPaddle = GetNode<Paddle>("LeftPaddle");
 		_rightPaddle = GetNode<Paddle>("RightPaddle");
 		
 		_goalTimer = GetNode<Timer>("GoalTimer");
-
-		_announcement = GetNode<Label>("MatchInterface/MatchMenu/Announcement");
 		
 		_ball.Velocity = new Vector2(_startBallDirection, 0);
 	}
@@ -89,7 +74,7 @@ public partial class Match : Node
 
 	public void OnGoalTimerTimeout()
 	{
-		_announcement.Visible = false;
+		ToggleMatchAnnouncement(false);
 		ResetPaddlePositions();
 		ResetBall();
 	}
@@ -110,14 +95,14 @@ public partial class Match : Node
 
 	public void ResetBall()
 	{
-		_ball.Position = _ballSpawnMarker.Position;
+		_ball.Position = GetNode<Marker2D>("Markers/BallSpawnMarker").Position;
 		_ball.Velocity = new Vector2(_startBallDirection, 0);
 	}
 
 	public void ResetPaddlePositions()
 	{
-		_leftPaddle.Position = new Vector2(_leftPaddle.Position.X, _leftPaddleMarker.Position.Y);
-		_rightPaddle.Position = new Vector2(_rightPaddle.Position.X, _rightPaddleMarker.Position.Y);
+		_leftPaddle.Position = new Vector2(_leftPaddle.Position.X, GetNode<Marker2D>("Markers/LeftPaddleMarker").Position.Y);
+		_rightPaddle.Position = new Vector2(_rightPaddle.Position.X, GetNode<Marker2D>("Markers/RightPaddleMarker").Position.Y);
 	}
 
 	public void ResetScores()
@@ -149,8 +134,9 @@ public partial class Match : Node
 
 	public void ToggleMatchAnnouncement(bool visible, string text = null)
 	{
-		_announcement.Visible = visible;
-		_announcement.Text = text;
+		Label announcement = GetNode<Label>("MatchInterface/MatchMenu/Announcement");
+		announcement.Visible = visible;
+		announcement.Text = text;
 	}
 	
 	public void ToggleMatchButtonsContainer(bool visible)

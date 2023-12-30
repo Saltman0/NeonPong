@@ -23,6 +23,6 @@ public partial class MatchInterface : Control
 	
 	public void OnMainMenuButtonPressed()
 	{
-		GetTree().Quit();
+		GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Interfaces/MainMenuInterface.tscn"));
 	}
 }

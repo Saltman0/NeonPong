@@ -1,0 +1,56 @@
+[gd_scene load_steps=2 format=3 uid="uid://da55ew70hfobj"]
+
+[ext_resource type="Script" path="res://Scenes/Interfaces/MainMenuInterface.cs" id="1_iyvws"]
+
+[node name="MainMenuInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iyvws")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SinglePlayerButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Single player"
+
+[node name="TwoPlayerButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Two player"
+
+[node name="MultiplayerButton" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Online multiplayer"
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 140.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+text = "Neon Pong
+"
+
+[connection signal="pressed" from="GridContainer/SinglePlayerButton" to="." method="OnSinglePlayerButtonPressed"]
