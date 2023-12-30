@@ -60,6 +60,7 @@ public partial class Match : Node
 		
 		if (RightScore == _scoreToReach)
 		{
+			ToggleMatchAnnouncement(true, "Right paddle won the game !");
 			ToggleMatchButtonsContainer(true);
 		}
 		else
@@ -76,6 +77,7 @@ public partial class Match : Node
 
 		if (LeftScore == _scoreToReach)
 		{
+			ToggleMatchAnnouncement(true, "Left paddle won the game !");
 			ToggleMatchButtonsContainer(true);
 		}
 		else
@@ -99,6 +101,7 @@ public partial class Match : Node
 
 	public void ReplayMatch()
 	{
+		ToggleMatchAnnouncement(false);
 		ToggleMatchButtonsContainer(false);
 		ResetBall();
 		ResetPaddlePositions();
