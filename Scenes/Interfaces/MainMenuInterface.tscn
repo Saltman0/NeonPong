@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://da55ew70hfobj"]
 
-[ext_resource type="Script" path="res://Scenes/Interfaces/MainMenuInterface.cs" id="1_iyvws"]
+[ext_resource type="Script" path="res://Scripts/Interfaces/MainMenuInterface.cs" id="1_qm50f"]
 
 [node name="MainMenuInterface" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_iyvws")
+script = ExtResource("1_qm50f")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1

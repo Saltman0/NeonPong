@@ -37,6 +37,15 @@ public partial class Match : Node
 	public override void _PhysicsProcess(double delta)
 	{
 	}
+	
+	public override void _Input(InputEvent @event)
+	{
+		bool isVisible = GetNode<GridContainer>("MatchInterface/MatchMenu/MatchButtonsContainer").Visible;
+		if (@event.IsActionPressed("match_menu"))
+		{
+			GetNode<GridContainer>("MatchInterface/MatchMenu/MatchButtonsContainer").Visible = !isVisible;
+		}
+	}
 
 	public void OnLeftGoalBodyEntered(Ball ball)
 	{
