@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bd0c4jaw1xty6"]
+
+[ext_resource type="PackedScene" uid="uid://cbylql5qbyirw" path="res://Scenes/Match.tscn" id="1_sgvbk"]
+
+[node name="TwoPlayerMatch" instance=ExtResource("1_sgvbk")]
+
+[node name="LeftPaddle" parent="Paddles" index="0"]
+_playerNumber = 1
+
+[node name="RightPaddle" parent="Paddles" index="1"]
+_playerNumber = 2

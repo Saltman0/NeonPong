@@ -1,32 +1,50 @@
-using Godot;
-using System;
 using System.Diagnostics;
+using Godot;
 
 public partial class Paddle : CharacterBody2D
 {
 	[Export]
-	private bool _isPlayer = true;
+	private int _playerNumber = 0;
+	
+	[Export]
+	private int _speed = 400;
 
 	private Vector2 _ballPosition;
-	
-	private const int Speed = 300;
 
 	private Vector2 _velocity;
 
 	public override void _Ready()
 	{
-		_velocity = Velocity;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_isPlayer)
+		if (_playerNumber > 0)
 		{
-			HandlePlayerMovement();
+			_velocity = new Vector2(
+				0, 
+				Input.GetVector(
+					"move_left" + _playerNumber, 
+					"move_right" + _playerNumber, 
+					"move_top" + _playerNumber, 
+					"move_down" + _playerNumber
+				).Y
+			) * _speed;
 		}
 		else
 		{
-			HandleAIMovement();
+			if (_ballPosition.Y < Position.Y)
+			{
+				_velocity.Y = -1 * _speed;
+			}
+			else if (_ballPosition.Y > Position.Y)
+			{
+				_velocity.Y = 1 * _speed;
+			}
+			else
+			{
+				_velocity.Y = 0 * _speed;
+			}
 		}
 
 		Velocity = _velocity;
@@ -34,27 +52,11 @@ public partial class Paddle : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	public void HandlePlayerMovement()
+	public void OnDetectBallTimerTimeout()
 	{
-		_velocity = new Vector2(
-			0, 
-			Input.GetVector("move_left", "move_right", "move_top", "move_down").Y
-		) * Speed;
-		Velocity = _velocity;
+		_ballPosition = ((Ball)GetTree().GetFirstNodeInGroup("Balls")).Position;
 	}
 	
-	public void HandleAIMovement()
-	{
-		_velocity.Y = (_ballPosition.Y > Position.Y ? 1 : -1) * Speed;
-		Velocity = _velocity;
-	}
-
-	public bool IsPlayer
-	{
-		get => _isPlayer;
-		set => _isPlayer = value;
-	}
-
 	public Vector2 BallPosition
 	{
 		get => _ballPosition;

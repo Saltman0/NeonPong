@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt72vunhura13"]
+
+[ext_resource type="Script" path="res://Scripts/Blocks/Brick.cs" id="1_oxsfq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v4umc"]
+size = Vector2(16, 32)
+
+[node name="Brick" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_oxsfq")
+
+[node name="BrickPolygon" type="Polygon2D" parent="."]
+scale = Vector2(0.125, 0.25)
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[node name="GrickCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v4umc")

@@ -4,8 +4,6 @@ using System.Diagnostics;
 
 public partial class Ball : CharacterBody2D
 {
-	[Signal]
-	public delegate void SendPositionEventHandler(int position);
 	
 	private int _speed = 500;
 
@@ -22,11 +20,12 @@ public partial class Ball : CharacterBody2D
 		if (collisionObject != null)
 		{
 			Velocity = Velocity.Bounce(collisionObject.GetNormal()) * 1.02f;
+			
+			if (collisionObject.GetCollider() is Brick)
+			{
+				((Brick)collisionObject.GetCollider()).Destroy();
+			}
+			
 		}
-	}
-
-	public void OnTimerTimeout()
-	{
-		EmitSignal(SignalName.SendPosition, Position);
 	}
 }

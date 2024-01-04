@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdpsl3g3vwe2i"]
+
+[ext_resource type="Texture2D" uid="uid://b0gwbuftrdrjv" path="res://Arts/Entities/Circle.png" id="1_ex4xu"]
+[ext_resource type="Script" path="res://Scripts/Entities/Magnet.cs" id="1_p7dvy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m2uim"]
+radius = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2q0dp"]
+radius = 192.0
+
+[node name="Magnet" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_p7dvy")
+
+[node name="MagnetSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.130612, 0.130612)
+texture = ExtResource("1_ex4xu")
+
+[node name="MagnetCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m2uim")
+
+[node name="MagnetGravityArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="MagnetGravityCollision" type="CollisionShape2D" parent="MagnetGravityArea"]
+shape = SubResource("CircleShape2D_2q0dp")
+
+[connection signal="body_entered" from="MagnetGravityArea" to="." method="OnMagnetGravityAreaBodyEntered"]

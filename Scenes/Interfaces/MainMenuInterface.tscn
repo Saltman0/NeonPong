@@ -11,7 +11,23 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qm50f")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="TitleContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = 100.0
+offset_right = 42.5
+offset_bottom = 140.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="TitleContainer"]
+layout_mode = 2
+text = "Neon Pong
+"
+
+[node name="ButtonsContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,32 +41,22 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SinglePlayerButton" type="Button" parent="GridContainer"]
+[node name="SinglePlayerButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
 text = "Single player"
 
-[node name="TwoPlayerButton" type="Button" parent="GridContainer"]
+[node name="TwoPlayerButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
 text = "Two player"
 
-[node name="MultiplayerButton" type="Button" parent="GridContainer"]
+[node name="MultiplayerButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
 text = "Online multiplayer"
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 100.0
-offset_right = 20.0
-offset_bottom = 140.0
-grow_horizontal = 2
-
-[node name="Label" type="Label" parent="CenterContainer"]
+[node name="ReturnToDesktopButton" type="Button" parent="ButtonsContainer"]
 layout_mode = 2
-text = "Neon Pong
-"
+text = "Return to desktop"
 
-[connection signal="pressed" from="GridContainer/SinglePlayerButton" to="." method="OnSinglePlayerButtonPressed"]
+[connection signal="pressed" from="ButtonsContainer/SinglePlayerButton" to="." method="OnSinglePlayerButtonPressed"]
+[connection signal="pressed" from="ButtonsContainer/TwoPlayerButton" to="." method="OnTwoPlayerButtonPressed"]
+[connection signal="pressed" from="ButtonsContainer/ReturnToDesktopButton" to="." method="OnReturnToDesktopButtonPressed"]

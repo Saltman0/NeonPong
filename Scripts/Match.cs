@@ -19,18 +19,22 @@ public partial class Match : Node
 	private Paddle _rightPaddle;
 
 	private Timer _goalTimer;
+
+	private PackedScene _brickScene;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		_ball = GetNode<Ball>("Ball");
 
-		_leftPaddle = GetNode<Paddle>("LeftPaddle");
-		_rightPaddle = GetNode<Paddle>("RightPaddle");
+		_leftPaddle = GetNode<Paddle>("Paddles/LeftPaddle");
+		_rightPaddle = GetNode<Paddle>("Paddles/RightPaddle");
 		
 		_goalTimer = GetNode<Timer>("GoalTimer");
 		
 		_ball.Velocity = new Vector2(_startBallDirection, 0);
+
+		_brickScene = GD.Load<PackedScene>("res://Scenes/Blocks/Brick.tscn");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,6 +104,23 @@ public partial class Match : Node
 		ResetBall();
 		ResetPaddlePositions();
 		ResetScores();
+		ResetBricks();
+	}
+	
+	public void ResetBricks()
+	{
+		foreach (Brick brick in GetNode<Node2D>("Bricks").GetChildren())
+		{
+			Trace.WriteLine("brick destroy");
+			brick.Destroy();
+		}
+		foreach (Marker2D brickMarker in GetNode<Node2D>("Markers/BrickMarkers").GetChildren())
+		{
+			Trace.WriteLine("brick add");
+			Brick brick = (Brick)_brickScene.Instantiate();
+			brick.Position = brickMarker.Position;
+			AddChild(brick);
+		}
 	}
 
 	public void ResetBall()
@@ -110,8 +131,8 @@ public partial class Match : Node
 
 	public void ResetPaddlePositions()
 	{
-		_leftPaddle.Position = new Vector2(_leftPaddle.Position.X, GetNode<Marker2D>("Markers/LeftPaddleMarker").Position.Y);
-		_rightPaddle.Position = new Vector2(_rightPaddle.Position.X, GetNode<Marker2D>("Markers/RightPaddleMarker").Position.Y);
+		_leftPaddle.Position = new Vector2(_leftPaddle.Position.X, GetNode<Marker2D>("Markers/PaddleMarkers/LeftPaddleMarker").Position.Y);
+		_rightPaddle.Position = new Vector2(_rightPaddle.Position.X, GetNode<Marker2D>("Markers/PaddleMarkers/RightPaddleMarker").Position.Y);
 	}
 
 	public void ResetScores()
@@ -133,12 +154,7 @@ public partial class Match : Node
 	public int RightScore
 	{
 		get => _rightScore;
-		set { _rightScore = value; GetNode<Label>("MatchInterface/ScorePanel/RightScoreCounter").Text = _rightScore.ToString(); }
-}
-
-	public void OnBallSendPosition(Vector2 position)
-	{
-		_rightPaddle.BallPosition = position;
+		set { _rightScore = value; GetNode<Label>("MatchInterface/ScorePanel/RightScoreCounter").Text = _rightScore.ToString(); } 
 	}
 
 	public void ToggleMatchAnnouncement(bool visible, string text = null)
