@@ -99,12 +99,12 @@ public partial class Match : Node
 
 	public void ReplayMatch()
 	{
+		Trace.WriteLine("Replay match parent");
 		ToggleMatchAnnouncement(false);
 		ToggleMatchButtonsContainer(false);
 		ResetBall();
 		ResetPaddlePositions();
 		ResetScores();
-		ResetBricks();
 	}
 	
 	public void ResetBricks()

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dbay6bgj0lp1q"]
+[gd_scene load_steps=2 format=3 uid="uid://dbay6bgj0lp1q"]
+
+[ext_resource type="Script" path="res://Scripts/Interfaces/GameModeInterface.cs" id="1_xnfke"]
 
 [node name="GameModeInterface" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_xnfke")
 
 [node name="GameModeMenu" type="GridContainer" parent="."]
 layout_mode = 1
@@ -30,3 +33,6 @@ text = "Classic
 [node name="SpecialModeButton" type="Button" parent="GameModeMenu"]
 layout_mode = 2
 text = "Special"
+
+[connection signal="pressed" from="GameModeMenu/ClassicModeButton" to="." method="OnClassicModeButtonPressed"]
+[connection signal="pressed" from="GameModeMenu/SpecialModeButton" to="." method="OnSpecialModeButtonPressed"]

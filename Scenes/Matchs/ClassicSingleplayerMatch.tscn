@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d06d2oijq1kj4"]
+
+[ext_resource type="Script" path="res://Scripts/Matchs/ClassicSingleplayerMatch.cs" id="1_70i0t"]
+[ext_resource type="PackedScene" uid="uid://cbylql5qbyirw" path="res://Scenes/Matchs/Match.tscn" id="1_ou5uv"]
+
+[node name="ClassicSingleplayerMatch" instance=ExtResource("1_ou5uv")]
+script = ExtResource("1_70i0t")
+
+[node name="LeftPaddle" parent="Paddles" index="0"]
+_playerNumber = 1

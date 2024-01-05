@@ -1,0 +1,122 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm2acvbrbxqmt"]
+
+[ext_resource type="PackedScene" uid="uid://cbylql5qbyirw" path="res://Scenes/Matchs/Match.tscn" id="1_vo1ee"]
+[ext_resource type="Script" path="res://Scripts/Matchs/SpecialMultiplayerMatch.cs" id="2_dg0gu"]
+[ext_resource type="PackedScene" uid="uid://bt72vunhura13" path="res://Scenes/Blocks/Brick.tscn" id="2_fifpd"]
+[ext_resource type="PackedScene" uid="uid://dtw7x4hfttrm2" path="res://Scenes/Blocks/Wall.tscn" id="3_eabey"]
+
+[node name="SpecialMultiplayerMatch" instance=ExtResource("1_vo1ee")]
+script = ExtResource("2_dg0gu")
+
+[node name="Bricks" type="Node2D" parent="." index="2"]
+metadata/_edit_lock_ = true
+
+[node name="Brick" parent="Bricks" index="0" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 64)
+
+[node name="Brick2" parent="Bricks" index="1" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 96)
+
+[node name="Brick3" parent="Bricks" index="2" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 128)
+
+[node name="Brick4" parent="Bricks" index="3" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 160)
+
+[node name="Brick5" parent="Bricks" index="4" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 192)
+
+[node name="Brick6" parent="Bricks" index="5" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 224)
+
+[node name="Brick7" parent="Bricks" index="6" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 256)
+
+[node name="Brick8" parent="Bricks" index="7" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 288)
+
+[node name="Brick9" parent="Bricks" index="8" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 368)
+
+[node name="Brick10" parent="Bricks" index="9" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 400)
+
+[node name="Brick11" parent="Bricks" index="10" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 432)
+
+[node name="Brick12" parent="Bricks" index="11" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 464)
+
+[node name="Brick13" parent="Bricks" index="12" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 496)
+
+[node name="Brick14" parent="Bricks" index="13" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 528)
+
+[node name="Brick15" parent="Bricks" index="14" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 560)
+
+[node name="Brick16" parent="Bricks" index="15" instance=ExtResource("2_fifpd")]
+position = Vector2(576, 592)
+
+[node name="MidWalls" type="Node2D" parent="." index="4"]
+metadata/_edit_lock_ = true
+
+[node name="MidWallTop" parent="MidWalls" index="0" instance=ExtResource("3_eabey")]
+position = Vector2(576, 192)
+scale = Vector2(0.333, 0.333)
+
+[node name="MidWallBottom" parent="MidWalls" index="1" instance=ExtResource("3_eabey")]
+position = Vector2(576, 448)
+scale = Vector2(0.333, 0.333)
+
+[node name="BrickMarkers" type="Node2D" parent="Markers" index="1"]
+metadata/_edit_lock_ = true
+
+[node name="BrickMarker" type="Marker2D" parent="Markers/BrickMarkers" index="0"]
+position = Vector2(576, 64)
+
+[node name="BrickMarker2" type="Marker2D" parent="Markers/BrickMarkers" index="1"]
+position = Vector2(576, 96)
+
+[node name="BrickMarker3" type="Marker2D" parent="Markers/BrickMarkers" index="2"]
+position = Vector2(576, 128)
+
+[node name="BrickMarker4" type="Marker2D" parent="Markers/BrickMarkers" index="3"]
+position = Vector2(576, 160)
+
+[node name="BrickMarker5" type="Marker2D" parent="Markers/BrickMarkers" index="4"]
+position = Vector2(576, 192)
+
+[node name="BrickMarker6" type="Marker2D" parent="Markers/BrickMarkers" index="5"]
+position = Vector2(576, 224)
+
+[node name="BrickMarker7" type="Marker2D" parent="Markers/BrickMarkers" index="6"]
+position = Vector2(576, 256)
+
+[node name="BrickMarker8" type="Marker2D" parent="Markers/BrickMarkers" index="7"]
+position = Vector2(576, 288)
+
+[node name="BrickMarker9" type="Marker2D" parent="Markers/BrickMarkers" index="8"]
+position = Vector2(576, 368)
+
+[node name="BrickMarker10" type="Marker2D" parent="Markers/BrickMarkers" index="9"]
+position = Vector2(576, 400)
+
+[node name="BrickMarker11" type="Marker2D" parent="Markers/BrickMarkers" index="10"]
+position = Vector2(576, 432)
+
+[node name="BrickMarker12" type="Marker2D" parent="Markers/BrickMarkers" index="11"]
+position = Vector2(576, 464)
+
+[node name="BrickMarker13" type="Marker2D" parent="Markers/BrickMarkers" index="12"]
+position = Vector2(576, 496)
+
+[node name="BrickMarker14" type="Marker2D" parent="Markers/BrickMarkers" index="13"]
+position = Vector2(576, 528)
+
+[node name="BrickMarker15" type="Marker2D" parent="Markers/BrickMarkers" index="14"]
+position = Vector2(576, 560)
+
+[node name="BrickMarker16" type="Marker2D" parent="Markers/BrickMarkers" index="15"]
+position = Vector2(576, 592)
