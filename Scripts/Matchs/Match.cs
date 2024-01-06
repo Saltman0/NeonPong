@@ -99,7 +99,6 @@ public partial class Match : Node
 
 	public void ReplayMatch()
 	{
-		Trace.WriteLine("Replay match parent");
 		ToggleMatchAnnouncement(false);
 		ToggleMatchButtonsContainer(false);
 		ResetBall();
@@ -111,12 +110,10 @@ public partial class Match : Node
 	{
 		foreach (Brick brick in GetNode<Node2D>("Bricks").GetChildren())
 		{
-			Trace.WriteLine("brick destroy");
 			brick.Destroy();
 		}
 		foreach (Marker2D brickMarker in GetNode<Node2D>("Markers/BrickMarkers").GetChildren())
 		{
-			Trace.WriteLine("brick add");
 			Brick brick = (Brick)_brickScene.Instantiate();
 			brick.Position = brickMarker.Position;
 			AddChild(brick);

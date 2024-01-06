@@ -10,12 +10,12 @@ public partial class MainMenuInterface : Control
 
 	public void OnSinglePlayerButtonPressed()
 	{
-		GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Interfaces/GameModeInterface.tscn"));
+		GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Interfaces/SingleplayerGameModeInterface.tscn"));
 	}
 	
 	public void OnTwoPlayerButtonPressed()
 	{
-		/*GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Matchs/TwoPlayerMatch.tscn"));*/
+		GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Interfaces/MultiplayerGameModeInterface.tscn"));
 	}
 
 	public void OnReturnToDesktopButtonPressed()

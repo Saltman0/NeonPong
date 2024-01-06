@@ -8,6 +8,12 @@
 [node name="SpecialMultiplayerMatch" instance=ExtResource("1_vo1ee")]
 script = ExtResource("2_dg0gu")
 
+[node name="LeftPaddle" parent="Paddles" index="0"]
+_playerNumber = 1
+
+[node name="RightPaddle" parent="Paddles" index="1"]
+_playerNumber = 2
+
 [node name="Bricks" type="Node2D" parent="." index="2"]
 metadata/_edit_lock_ = true
 
