@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://da55ew70hfobj"]
+[gd_scene load_steps=5 format=3 uid="uid://da55ew70hfobj"]
 
 [ext_resource type="Script" path="res://Scripts/Interfaces/MainMenuInterface.cs" id="1_qm50f"]
+[ext_resource type="PackedScene" uid="uid://btd01axlmlwft" path="res://Scenes/Interfaces/SingleplayerGameModeInterface.tscn" id="2_kxvoh"]
+[ext_resource type="PackedScene" uid="uid://b45se4x5hxutj" path="res://Scenes/Interfaces/MultiplayerGameModeInterface.tscn" id="3_dkhc1"]
+[ext_resource type="PackedScene" uid="uid://b01880aaujbui" path="res://Scenes/Interfaces/OnlineGameModeInterface.tscn" id="4_006bd"]
 
 [node name="MainMenuInterface" type="Control"]
 layout_mode = 3
@@ -11,23 +14,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qm50f")
 
-[node name="TitleContainer" type="CenterContainer" parent="."]
+[node name="TitleLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -42.5
-offset_top = 100.0
+offset_top = 20.0
 offset_right = 42.5
-offset_bottom = 140.0
+offset_bottom = 43.0
 grow_horizontal = 2
-
-[node name="Label" type="Label" parent="TitleContainer"]
-layout_mode = 2
 text = "Neon Pong
 "
 
-[node name="ButtonsContainer" type="GridContainer" parent="."]
+[node name="MainMenuContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,23 +41,39 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SinglePlayerButton" type="Button" parent="ButtonsContainer"]
+[node name="SinglePlayerButton" type="Button" parent="MainMenuContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 0
 text = "Single player"
 
-[node name="TwoPlayerButton" type="Button" parent="ButtonsContainer"]
+[node name="MultiplayerButton" type="Button" parent="MainMenuContainer"]
 layout_mode = 2
-text = "Two player"
+text = "Multiplayer"
 
-[node name="MultiplayerButton" type="Button" parent="ButtonsContainer"]
+[node name="OnlineButton" type="Button" parent="MainMenuContainer"]
 layout_mode = 2
 text = "Online multiplayer"
 
-[node name="ReturnToDesktopButton" type="Button" parent="ButtonsContainer"]
+[node name="ReturnToDesktopButton" type="Button" parent="MainMenuContainer"]
 layout_mode = 2
 text = "Return to desktop"
 
-[connection signal="pressed" from="ButtonsContainer/SinglePlayerButton" to="." method="OnSinglePlayerButtonPressed"]
-[connection signal="pressed" from="ButtonsContainer/TwoPlayerButton" to="." method="OnTwoPlayerButtonPressed"]
-[connection signal="pressed" from="ButtonsContainer/ReturnToDesktopButton" to="." method="OnReturnToDesktopButtonPressed"]
+[node name="SingleplayerGameModeInterface" parent="." instance=ExtResource("2_kxvoh")]
+visible = false
+layout_mode = 1
+
+[node name="MultiplayerGameModeInterface" parent="." instance=ExtResource("3_dkhc1")]
+visible = false
+layout_mode = 1
+
+[node name="OnlineGameModeInterface" parent="." instance=ExtResource("4_006bd")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="MainMenuContainer/SinglePlayerButton" to="." method="OnSinglePlayerButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/MultiplayerButton" to="." method="OnMultiplayerButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/OnlineButton" to="." method="OnOnlineButtonPressed"]
+[connection signal="pressed" from="MainMenuContainer/ReturnToDesktopButton" to="." method="OnReturnToDesktopButtonPressed"]
+[connection signal="ReturnToMainMenu" from="SingleplayerGameModeInterface" to="." method="OnSingleplayerGameModeInterfaceReturnToMainMenu"]
+[connection signal="ReturnToMainMenu" from="MultiplayerGameModeInterface" to="." method="OnMultiplayerGameModeInterfaceReturnToMainMenu"]
+[connection signal="ReturnToMainMenu" from="OnlineGameModeInterface" to="." method="OnOnlineGameModeInterfaceReturnToMainMenu"]

@@ -3,6 +3,9 @@ using System;
 
 public partial class SingleplayerGameModeInterface : Control
 {
+    [Signal]
+    public delegate void ReturnToMainMenuEventHandler();
+    
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -21,5 +24,10 @@ public partial class SingleplayerGameModeInterface : Control
     public void OnSpecialModeButtonPressed()
     {
         GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Matchs/SpecialSingleplayerMatch.tscn"));
+    }
+
+    public void OnReturnButtonPressed()
+    {
+        EmitSignal(SignalName.ReturnToMainMenu);
     }
 }
