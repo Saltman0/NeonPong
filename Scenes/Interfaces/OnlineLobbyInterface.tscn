@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://cmo645rx7dxkt"]
+
+[node name="OnlineLobbyInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UsersContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.0277778
+anchor_top = 0.439815
+anchor_right = 0.479167
+anchor_bottom = 0.561728
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="UserListContainer" type="VBoxContainer" parent="UsersContainer"]
+layout_mode = 2
+
+[node name="UserHeaderContainer" type="GridContainer" parent="UsersContainer/UserListContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+columns = 2
+
+[node name="UsernameHeaderLabel" type="Label" parent="UsersContainer/UserListContainer/UserHeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Username"
+
+[node name="ReadyHeaderLabel" type="Label" parent="UsersContainer/UserListContainer/UserHeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Ready"
+
+[node name="Player1Container" type="GridContainer" parent="UsersContainer/UserListContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Player1UsernameLabel" type="Label" parent="UsersContainer/UserListContainer/Player1Container"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Player 1"
+
+[node name="Player1ReadyButton" type="CheckButton" parent="UsersContainer/UserListContainer/Player1Container"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Player2Container" type="GridContainer" parent="UsersContainer/UserListContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Player2UsernameLabel" type="Label" parent="UsersContainer/UserListContainer/Player2Container"]
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Player 2"
+
+[node name="Player2ReadyButton" type="CheckButton" parent="UsersContainer/UserListContainer/Player2Container"]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="GameInformationsContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+anchor_left = 0.520833
+anchor_top = 0.0987654
+anchor_right = 0.972222
+anchor_bottom = 0.901235
+metadata/_edit_use_anchors_ = true
