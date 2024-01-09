@@ -15,7 +15,6 @@ scale = Vector2(0.361111, 0.395062)
 texture = ExtResource("2_aoelh")
 
 [node name="PaddleCollision" type="CollisionPolygon2D" parent="."]
-visible = false
 polygon = PackedVector2Array(-1, -67, 1, -67, 4, -65, 6, -62, 7, -60, 8, -57, 10, -52, 11, -48, 12, -44, 14, -35, 15, -26, 16, -14, 16, 0, 16, 8, 15, 24, 13, 37, 11, 47, 9, 53, 6, 60, 2, 64, 0, 65, -2, 65, -5, 64, -9, 59, -12, 52, -15, 41, -17, 31, -18, 19, -19, 0, -18, -24, -17, -33, -15, -44, -13, -52, -11, -57, -9, -61, -6, -65, -3, -67)
 
 [node name="DetectBallTimer" type="Timer" parent="."]

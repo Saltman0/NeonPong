@@ -58,7 +58,7 @@ public partial class OnlineGameModeInterface : Control
 		Error error = _peer.CreateServer(8910, 2);
 		if (error != Error.Ok)
 		{
-			GD.Print("Host failed");
+			GD.Print(error.ToString());
 		}
 		
 		_peer.Host.Compress(ENetConnection.CompressionMode.RangeCoder);
@@ -66,6 +66,8 @@ public partial class OnlineGameModeInterface : Control
 		Multiplayer.MultiplayerPeer = _peer;
 		
 		GD.Print("Host success");
+		
+		GetTree().ChangeSceneToPacked(ResourceLoader.Load<PackedScene>("res://Scenes/Interfaces/OnlineLobbyInterface.tscn"));
 	}
 	
 	public void OnJoinButtonPressed()
